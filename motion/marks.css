@@ -18,6 +18,7 @@
 .pp-marks--back { z-index: 0; mix-blend-mode: normal; }   /* under the content it only meets paper: */
 .pp-marks--back .pp-ink--tone { fill: #ccd4c4; }          /* the tone multiplied onto paper, without the cost of blending */
 .pp-marks--front { z-index: 2; }
+[data-component="about"] > .pp-marks--front { mix-blend-mode: normal; }   /* the signature crosses the portrait: multiplied, it sinks into anything dark there */
 .pp-marks--over { z-index: 3; mix-blend-mode: normal; }   /* strike-throughs: red on top of the letters */
 
 .pp-ink--green { fill: var(--pp-green); }
