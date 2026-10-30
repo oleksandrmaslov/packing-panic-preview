@@ -759,10 +759,16 @@
         } else {
           size = Math.min(m.w * 0.9 / 1.62, m.h * 0.62);
           x = m.x + m.w * 0.05 + size * 0.06;
-          y = m.y + m.h * 0.72;
+          y = m.y + m.h * 0.84;
         }
         const sa = () => ({ text: "Jens", x, y, size, slant: 0.18, seed: 31 });
-        const sig = script("Jens", Object.assign(sa(), { glyphs, upm }));
+        let sig = script("Jens", Object.assign(sa(), { glyphs, upm }));
+        // Stacked: stays inside the portrait, low enough to leave the face clear
+        if (!desk && sig.width > m.w * 0.82) {   // sig.width leaves out the flourish of the "s"
+          size *= m.w * 0.82 / sig.width;
+          x = m.x + m.w * 0.05 + size * 0.06;
+          sig = script("Jens", Object.assign(sa(), { glyphs, upm }));
+        }
         const pen = clamp2(size * 0.032, 5, 15);
         const strokes = sig.strokes.map((pts, i) => ({ pts, spec: ["script", sa(), i], size: pen, seed: 31 + i, dry: 0.3, bristles: 6 }));
         if (!desk) {
